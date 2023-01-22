@@ -1,17 +1,59 @@
+// dish Models require
+const Dish = require("../models/dishModel");
+
 const getDishes = async (req, res) => {
-  res.json({ msg: "get all dishes" });
+    try {
+      const dish = await Dish.find({})
+      res.status(200).json({ dish });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error.message });
+    }
 };
+
 const getDish = async (req, res) => {
-  res.json({ msg: "get single dish" });
+    const { id } = req.params;
+    try {
+      const dish = await Dish.findById(id);
+      res.status(201).json({ dish });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ error: error.message });
+    }
 };
+
 const postDish = async (req, res) => {
-  res.json({ msg: "create new dish" });
+  const { name, price } = req.body;
+  try {
+    const dish = await Dish.create({ name, price });
+    res.status(201).json({ dish });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
 };
+
 const patchDish = async (req, res) => {
-  res.json({ msg: "update dish" });
+    const { id } = req.params;
+    try {
+      const dish = await Dish.findByIdAndUpdate(id,{...req.body});
+      res.status(201).json({ dish });
+    } catch (error) {
+      console.log(error);
+      res.status(401).json({ error: error.message });
+    }
 };
+
+
 const deleteDish = async (req, res) => {
-  res.json({ msg: "delete dish" });
+    const { id } = req.params;
+    try {
+      const dish = await Dish.findByIdAndDelete(id);
+      res.status(200).json({ dish });
+    } catch (error) {
+      console.log(error);
+      res.status(401).json({ error: error.message });
+    }
 };
 
 module.exports = {
