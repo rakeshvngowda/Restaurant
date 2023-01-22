@@ -18,8 +18,12 @@ mongoose.connection.once("open", () => {
 // Routes
 const userRoutes = require("./routes/users");
 const dishRoutes = require('./routes/dishes')
+const cartRoutes = require('./routes/cart')
+const orderRoutes = require('./routes/orders')
 app.use("/users", userRoutes);
 app.use("/dishes", dishRoutes);
+app.use("/cart", cartRoutes);
+app.use("/orders", orderRoutes);
 
 // listing port block
 app.listen(process.env.PORT, () => {
