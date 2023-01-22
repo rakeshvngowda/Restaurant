@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { useReducer } from "react";
-import { createContext } from "react";
+import { useEffect, useReducer, createContext } from "react";
 
 export const AuthContext = createContext();
 
@@ -25,10 +23,11 @@ export const AuthContextProvider = ({ children }) => {
     if (user) {
       dispatch({ type: "LOGIN", payload: user });
     }
-    console.log(user);
   }, []);
-
-  <AuthContext.Provider value={{...state,dispatch}}>
-    {children}
-  </AuthContext.Provider>
+  console.log("AuthContext state: ", state);
+  return (
+    <AuthContext.Provider value={{ ...state, dispatch }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

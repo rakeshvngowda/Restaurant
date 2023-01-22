@@ -8,6 +8,6 @@ export const useDishContext = () => {
   if (!context) {
     throw Error("useDishContext must be used inside an DishContextProvider");
   }
-
+  
   return context;
 };

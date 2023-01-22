@@ -7,11 +7,11 @@ import { DishesContextProvider } from "./context/DishesContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContextProvider>
-    <DishesContextProvider>
-      <React.StrictMode>
+  <React.StrictMode>
+    <AuthContextProvider>
+      <DishesContextProvider>
         <App />
-      </React.StrictMode>
-    </DishesContextProvider>
-  </AuthContextProvider>
+      </DishesContextProvider>
+    </AuthContextProvider>
+  </React.StrictMode>
 );
