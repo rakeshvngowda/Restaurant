@@ -5,11 +5,10 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useCartContext } from "../hooks/useCartContext";
 
-
 const CartDeatils = ({ dish }) => {
   const { dispatch } = useCartContext();
   const { user } = useAuthContext();
-  
+
   if (!user) {
     return;
   }
@@ -37,13 +36,10 @@ const CartDeatils = ({ dish }) => {
         createdAt:{" "}
         {formatDistanceToNow(new Date(dish.createdAt), { addSuffix: true })}
       </p>
-      {
-        user.email == "admin@gmail.com" && (
-          <span className="material-symbols-outlined">
-          Remove 
-        </span>
-        )
-      }
+
+      {user.email == "admin@gmail.com" && (
+        <span className="material-symbols-outlined">Remove</span>
+      )}
       {user.email != "admin@gmail.com" && (
         <span className="material-symbols-outlined" onClick={handleClick}>
           delete

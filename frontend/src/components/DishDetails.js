@@ -36,13 +36,7 @@ const DishDeatils = ({ dish }) => {
       body: JSON.stringify({ name, price, email }),
     });
     const json = await response.json();
-
-    if (response.ok) {
-      catDispatch({
-        type: "SET_CART_DISHES",
-        payload: { name, price, email },
-      });
-    }
+    
   };
 
   return (

@@ -16,9 +16,11 @@ const Order = () => {
     const fetchOrderDishes = async () => {
       const response = await fetch("http://localhost:4000/orders");
       const json = await response.json();
+      const jsonDish = json.dish;
+      const jsonData = jsonDish.filter((dish) => dish.email === user.email);
       console.log(json);
       if (response.ok) {
-        dispatch({ type: "SET_ORDER_DISHES", payload: json.dish });
+        dispatch({ type: "SET_ORDER_DISHES", payload: jsonData });
       }
     };
 

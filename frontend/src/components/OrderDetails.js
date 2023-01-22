@@ -5,11 +5,10 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useOrderContext } from "../hooks/useOrderContext";
 
-
 const OrderDeatils = ({ dish }) => {
   const { dispatch } = useOrderContext();
   const { user } = useAuthContext();
-  
+
   if (!user) {
     return;
   }
@@ -25,6 +24,19 @@ const OrderDeatils = ({ dish }) => {
     }
   };
 
+  const handleUpdateStatus = async (newStatus) => {
+    try {
+      const response = await fetch("http://localhost:3000/orders/" + dish._id, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      console.log(response.json());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="workout-details">
       <h4>Dish: {dish.name}</h4>
@@ -37,18 +49,15 @@ const OrderDeatils = ({ dish }) => {
         createdAt:{" "}
         {formatDistanceToNow(new Date(dish.createdAt), { addSuffix: true })}
       </p>
-      {
-        user.email == "admin@gmail.com" && (
-          <span className="material-symbols-outlined">
-          Remove 
-        </span>
-        )
-      }
       {user.email != "admin@gmail.com" && (
-        <span className="material-symbols-outlined" onClick={handleClick}>
-          delete
-        </span>
+        <span className="material-symbols-outlined">{dish.status}</span>
       )}
+
+      <button onClick={() => handleUpdateStatus("Declined")}>Decline</button>
+      <button onClick={() => handleUpdateStatus("Accepted")}>Accept</button>
+      <button onClick={() => handleUpdateStatus("Delieverd")}>
+        Delievered
+      </button>
     </div>
   );
 };
