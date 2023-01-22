@@ -1,46 +1,46 @@
-import { useEffect }from 'react'
-import DishDetails from '../components/DishDetails'
-
+import { useEffect } from "react";
+import DishDetails from "../components/DishDetails";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // components
 
 
-import { useAuthContext } from '../hooks/useAuthContext'
-import { useDishContext } from '../hooks/useDishContext'
+import { useDishContext } from "../hooks/useDishContext";
 
 const Home = () => {
-  const {dishes, dispatch} = useDishContext()
-  const {user} = useAuthContext()
+  const { dishes, dispatch } = useDishContext();
+  const { user } = useAuthContext();
+  console.log(dishes);
 
   useEffect(() => {
     const fetchDishes = async () => {
-      const response = await fetch('http://localhost:4000/dishes',{
-        headers:{
-          'Authorization': `Bearer ${user.token}`
-        }
-      })
-      const json = await response.json()
-
+      const response = await fetch("http://localhost:4000/dishes");
+      const json = await response.json();
+      // console.log(json);
       if (response.ok) {
-        dispatch({type: 'SET_DISHES', payload: json})
+        dispatch({ type: "SET_DISHES", payload: json.dish });
       }
-    }
+    };
 
     if (user) {
-      fetchDishes()
+      fetchDishes();
     }
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <div className="home">
       <div className="workouts">
-        {dishes && dishes.map((dish) => (
-          <DishDetails key={dish._id} dish={dish} />
-        ))}
+        {dishes && dishes.map((dish)=> {
+          return (
+            <DishDetails dish={dish} />
+          )
+        })}
+          
+        
       </div>
-      <WorkoutForm />
+      
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
