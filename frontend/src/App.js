@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "./App.css";
 
-import CartDetails from "./components/CartDetails";
+
 import Signup from "./pages/Signup";
 import LoginPage from "./pages/LoginPage";
 import Home from "./pages/Home";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Orders from "./pages/Order";
+import Cart from "./pages/Cart";
 
 function App() {
   const { user } = useAuthContext();
@@ -31,7 +32,7 @@ function App() {
           />
           <Route
             path="/cart"
-            element={user ? <CartDetails /> : <Navigate to="/" />}
+            element={user ? <Cart /> : <Navigate to="/" />}
           />
           <Route
             path="/orders"

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import DishDetails from "../components/DishDetails";
+import DishForm from "../components/DishForm";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // components
@@ -10,7 +11,7 @@ import { useDishContext } from "../hooks/useDishContext";
 const Home = () => {
   const { dishes, dispatch } = useDishContext();
   const { user } = useAuthContext();
-  console.log(dishes);
+  
 
   useEffect(() => {
     const fetchDishes = async () => {
@@ -32,11 +33,11 @@ const Home = () => {
       <div className="workouts">
         {dishes && dishes.map((dish)=> {
           return (
-            <DishDetails dish={dish} />
+            <DishDetails dish={dish} key={dish._id}/>
           )
         })}
           
-        
+        <DishForm />
       </div>
       
     </div>

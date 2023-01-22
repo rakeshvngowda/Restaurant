@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CartDetails() {
+export default function Cart() {
   return (
     <div className="workout-details">
       <h4>Dish</h4>
