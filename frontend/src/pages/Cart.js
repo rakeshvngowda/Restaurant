@@ -23,7 +23,10 @@ const Cart = () => {
       const response = await fetch("http://localhost:4000/orders/", {
         method: "POST",
         body: JSON.stringify({ name, price, email }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
       });
     } catch (error) {
       console.log(error.message);
@@ -66,6 +69,7 @@ const Cart = () => {
   return (
     <div className="home">
       <div className="workouts">
+        <h2>Cart Deatails</h2>
         {dishes &&
           dishes.map((dish) => {
             return <CartDeatils dish={dish} key={dish._id} />;

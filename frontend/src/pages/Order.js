@@ -21,7 +21,13 @@ const Order = () => {
       });
       const json = await response.json();
       const jsonDish = json.dish;
-      const jsonData = jsonDish.filter((dish) => dish.email === user.email);
+      let jsonData;
+      if (user.email != "admin@gmail.com") {
+        jsonData = jsonDish.filter((dish) => dish.email === user.email);
+      } else {
+        jsonData = jsonDish.filter((dish) => dish);
+      }
+
       console.log(json);
       if (response.ok) {
         dispatch({ type: "SET_ORDER_DISHES", payload: jsonData });
@@ -36,6 +42,7 @@ const Order = () => {
   return (
     <div className="home">
       <div className="workouts">
+        <h2>Orders Page</h2>
         {dishes &&
           dishes.map((dish) => {
             return <OrderDeatils dish={dish} key={dish._id} />;

@@ -30,13 +30,15 @@ const Home = () => {
 
   return (
     <div className="home">
+      
       <div className="workouts">
+      <h2>Home Page</h2>
         {dishes &&
           dishes.map((dish) => {
             return <DishDetails dish={dish} key={dish._id} />;
           })}
 
-        <DishForm />
+        {(user.email ==="admin@gmail.com") &&<DishForm />}
       </div>
     </div>
   );

@@ -66,7 +66,7 @@ const DishForm = () => {
         className={emptyFields.includes("price") ? "error" : ""}
       />
 
-      <button>Add Workout</button>
+      <button>Add Dish</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
