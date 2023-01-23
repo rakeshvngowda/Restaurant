@@ -27,6 +27,7 @@ const DishForm = () => {
       body: JSON.stringify(dish),
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${user.token}`
       },
     });
     const json = await response.json();

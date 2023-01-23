@@ -5,11 +5,13 @@ const {
     postDish,
     patchDish,
     deleteDish,
-  } = require('../controllers/dishControllers')
+  } = require('../controllers/dishControllers');
+const requiAuth = require("../middleware/requireAuth");
 
 
 const router = express.Router();
 
+router.use(requiAuth)
 // get all dishes
 router.get('/',getDishes)
 

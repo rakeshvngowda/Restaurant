@@ -16,6 +16,9 @@ const CartDeatils = ({ dish }) => {
   const handleClick = async () => {
     const response = await fetch("http://localhost:4000/cart/" + dish._id, {
       method: "DELETE",
+      headers:{
+        'Authorization': `Bearer ${user.token}`
+      }
     });
     const json = await response.json();
 

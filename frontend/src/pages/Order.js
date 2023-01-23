@@ -14,7 +14,11 @@ const Order = () => {
 
   useEffect(() => {
     const fetchOrderDishes = async () => {
-      const response = await fetch("http://localhost:4000/orders");
+      const response = await fetch("http://localhost:4000/orders", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const json = await response.json();
       const jsonDish = json.dish;
       const jsonData = jsonDish.filter((dish) => dish.email === user.email);

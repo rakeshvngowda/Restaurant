@@ -17,6 +17,9 @@ const DishDeatils = ({ dish }) => {
   const handleClick = async () => {
     const response = await fetch("http://localhost:4000/dishes/" + dish._id, {
       method: "DELETE",
+      headers:{
+        'Authorization': `Bearer ${user.token}`
+      }
     });
     const json = await response.json();
 
@@ -32,11 +35,13 @@ const DishDeatils = ({ dish }) => {
 
     const response = await fetch("http://localhost:4000/cart/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ name, price, email }),
     });
     const json = await response.json();
-    
   };
 
   return (

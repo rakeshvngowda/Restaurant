@@ -11,7 +11,11 @@ const Home = () => {
 
   useEffect(() => {
     const fetchDishes = async () => {
-      const response = await fetch("http://localhost:4000/dishes");
+      const response = await fetch("http://localhost:4000/dishes", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const json = await response.json();
       // console.log(json);
       if (response.ok) {

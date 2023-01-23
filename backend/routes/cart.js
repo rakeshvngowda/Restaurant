@@ -7,8 +7,12 @@ const {
 } = require("../controllers/cartControllers");
 
 const express = require("express");
+const requiAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
+
+
+router.use(requiAuth)
 
 // get all dishes
 router.get("/", getCartDishes);

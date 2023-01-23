@@ -33,6 +33,9 @@ const Cart = () => {
     try {
       const response = await fetch("http://localhost:4000/cart/" + recipe._id, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       });
     } catch (error) {
       console.log(error.message);
@@ -41,7 +44,11 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchCartDishes = async () => {
-      const response = await fetch("http://localhost:4000/cart");
+      const response = await fetch("http://localhost:4000/cart", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const json = await response.json();
       const jsonDish = json.dish;
       const jsonData = jsonDish.filter((dish) => dish.email === user.email);
@@ -53,12 +60,8 @@ const Cart = () => {
 
     if (user) {
       fetchCartDishes();
-      
     }
   }, [dispatch]);
-
-  
-  
 
   return (
     <div className="home">

@@ -16,6 +16,9 @@ const OrderDeatils = ({ dish }) => {
   const handleClick = async () => {
     const response = await fetch("http://localhost:4000/orders/" + dish._id, {
       method: "DELETE",
+      headers:{
+        'Authorization': `Bearer ${user.token}`
+      }
     });
     const json = await response.json();
 
@@ -28,7 +31,10 @@ const OrderDeatils = ({ dish }) => {
     try {
       const response = await fetch("http://localhost:3000/orders/" + dish._id, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${user.token}`,
+        },
         body: JSON.stringify({ status: newStatus }),
       });
       console.log(response.json());
